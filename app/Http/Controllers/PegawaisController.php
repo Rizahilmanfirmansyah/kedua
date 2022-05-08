@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\pegawai;
+use Validator;
 use App\Models\Jabatan;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class PegawaisController extends Controller
      */
     public function index()
     {
-        $pegawais = pegawai::with('jabatanfungsi')->paginate(5);
+        $pegawais = pegawai::all();
         return view('pegawais.index', compact('pegawais')); 
     }
 
@@ -39,13 +40,62 @@ class PegawaisController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required', 
-            'jabatan_id' => 'required', 
-            'umur' => 'required',
+            'foto' =>'required',
+            'nama' => 'required',
+            'jabatan' => 'required',
             'jk' => 'required',
-            'alamat' => 'required',
-            
+            'noktp' => 'required',
+            'npwp' => 'required',
+            'nobpjs' => 'required',
+            'nokk' => 'required',
+            'ttl' => 'required',
+            'alamatktp' => 'required',
+            'domisili' => 'required',
+            'gaji' => 'required',
+            'tanggalgaji' => 'required',
+            'norek' => 'required',
+            'bank' => 'required',
+            'email' => 'required',
+            'nohp' => 'required',
+            'tanggalawal' => 'required',
+            'status' => 'required',
+            'tanggungan' => 'required',
+            'awalmasuk' => 'required',
+            'tanggalmasuk' => 'required',
+            'berakhir' => 'required'
         ]);
+        $file = $request->file('foto');
+        $nama_file = time()."_".$file->getClientOriginalName();
+        $tujuan_upload = 'data_file';
+        $file->move($tujuan_upload,$nama_file);
+
+        pegawai::create([
+            'foto' => $nama_file,
+            'nama' => $request->nama,
+            'jabatan' => $request->jabatan,
+            'jk' => $request->jk,
+            'noktp' => $request->noktp,
+            'npwp' => $request->npwp,
+            'nobpjs' => $request->nobpjs,
+            'nokk' => $request->nokk,
+            'ttl' => $request->ttl,
+            'alamatktp' => $request->alamatktp,
+            'domisili' => $request->domisili,
+            'gaji' => $request->gaji,
+            'tanggalgaji' => $request->tanggalgaji,
+            'norek' => $request->norek,
+            'bank' => $request->bank,
+            'email' => $request->email,
+            'nohp' => $request->nohp,
+            'tanggalawal' => $request->tanggalawal,
+            'status' => $request->status,
+            'tanggungan' => $request->tanggungan,
+            'awalmasuk' => $request->awalmasuk,
+            'tanggalmasuk' => $request->tanggalmasuk,
+            'berakhir' => $request->berakhir,
+
+        ]);
+
         pegawai::create($data);
         return redirect()->route('pegawais.index')
             ->with('success', 'Pegawai Berhasil Ditambahkan.');

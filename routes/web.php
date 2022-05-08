@@ -20,3 +20,7 @@ Route::get('/', function () {
 
 Route::resource('pegawais', PegawaisController::class);
 
+Route::get('/ok', function(){
+    return view('template');
+});
+

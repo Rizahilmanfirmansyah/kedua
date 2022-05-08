@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class pegawai extends Model
 {
+     
     use HasFactory;
-    protected $table = "pegawais";
+    protected $table = "datapegawai";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'nama', 'jabatan_id', 'umur', 'jk', 'alamat'
+        'foto', 'nama','jabatan' ,'jk','noktp','npwp','nobpjs','nokk','ttl','alamatktp','domisili','gaji','tanggalgaji','norek','bank','email','nohp','tanggalawal','status','tanggungan','awalmasuk','tanggalmasuk','berakhir'
     ];
 
-    public function jabatanfungsi()
-    {
-        return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    //public function jabatanfungsi()
+   // {
+      //  return $this->belongsTo(Jabatan::class, 'jabatan_id');
         
-    }
+    //}
 }

@@ -56,6 +56,7 @@
                     <input type="text" name="alamat" class="form-control" id="alamat" value="{{$pegawai->alamat}}" aria-describedby="alamat" placeholder="Masukan Alamat">
                 </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
+            <input type="button" class="btn btn-primary" value="Kembali" onclick="history.back(-1)" />
             </form>
             </div>
         </div>
